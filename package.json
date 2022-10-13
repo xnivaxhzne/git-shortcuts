@@ -2,6 +2,7 @@
   "name": "@xniva/git-shortcuts",
   "version": "1.0.0",
   "description": "Shortcuts for the commonly used git commands",
+  "repository": "https://github.com/kavinkuma6/git-shortcuts",
   "bin": {
     "gcm": "bin/git_checkout_master.js",
     "gpm": "bin/git_pull_master.js",
@@ -12,7 +13,7 @@
     "gmm": "bin/git_merge_master.js",
     "gb": "bin/git_current_branch.js"
   },
-  "author": "kavinkumar1543884@gmail.com",
+  "author": "Kavinkumar R",
   "license": "ISC",
   "dependencies": {
     "shelljs": "^0.8.5"
