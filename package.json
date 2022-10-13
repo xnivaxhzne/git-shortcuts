@@ -1,0 +1,24 @@
+{
+  "name": "@xniva/git-shortcuts",
+  "version": "1.0.0",
+  "description": "Shortcuts for the commonly used git commands",
+  "bin": {
+    "gcm": "bin/git_checkout_master.js",
+    "gpm": "bin/git_pull_master.js",
+    "gl": "bin/git_log.js",
+    "gf": "bin/git_fetch.js",
+    "gs": "bin/git_status.js",
+    "gph": "bin/git_push_head.js",
+    "gmm": "bin/git_merge_master.js",
+    "gb": "bin/git_current_branch.js"
+  },
+  "author": "kavinkumar1543884@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "shelljs": "^0.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
