@@ -1,4 +1,4 @@
 #! /usr/bin/env node
+const { runCommand } = require("./../utils/run-command");
 
-const shell = require("shelljs");
-shell.exec("git checkout master");
+runCommand("git", ["checkout", "master"]);

@@ -1,4 +1,4 @@
 #! /usr/bin/env node
+const { runCommand } = require("./../utils/run-command");
 
-const shell = require("shelljs");
-shell.exec("git branch --show-current");
+runCommand("git", ["branch", "--show-current"]);
