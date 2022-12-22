@@ -29,7 +29,7 @@ const runPromiseCommand = (command, args) => {
 /**
  * @param {string} command process to run
  * @param {string[]} args command line arguments
- * @param {{onError: ()=> ,onSuccess : ()=> }} options options for passing callback function
+ * @param {{onError: ()=> string, onSuccess: ()=>string }} options options for passing callback function
  * @returns {void} null
  */
 const runCommand = (
@@ -37,21 +37,17 @@ const runCommand = (
   args,
   { onError, onSuccess } = { onError: null, onSuccess: null }
 ) => {
-  const executedCommand = cp.spawn(command, args, {
-    stdio: "inherit",
-    shell: true
-  });
-  executedCommand.on("error", (error) => {
-    if (onError) {
-      onError(error);
+  const executedCommand = cp.spawn(command, args);
+
+  executedCommand.stdout.on("data", (data) => {
+    if (onSuccess) {
+      onSuccess(data.toString());
     }
   });
 
-  executedCommand.on("exit", (code) => {
-    if (code === 0 && onSuccess) {
-      onSuccess();
-    } else if (onError) {
-      onError();
+  executedCommand.stderr.on("data", (error) => {
+    if (onError) {
+      onError(error.toString());
     }
   });
 };

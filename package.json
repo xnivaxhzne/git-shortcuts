@@ -1,6 +1,6 @@
 {
   "name": "@xniva/git-shortcuts",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Shortcuts for the commonly used git commands",
   "repository": "https://github.com/kavinkuma6/git-shortcuts",
   "bin": {
@@ -13,7 +13,10 @@
     "gph": "bin/git_push_head.js",
     "gpm": "bin/git_pull_master.js",
     "gs": "bin/git_status.js",
-    "gsr": "bin/git_soft_reset_last_commit.js"
+    "gsr": "bin/git_soft_reset_last_commit.js",
+    "glp": "bin/git_print_last_commit_message.js",
+    "glc": "bin/git_print_copy_last_commit_message.js",
+    "gr": "bin/git_restore.js"
   },
   "author": "Kavinkumar R",
   "license": "MIT",
