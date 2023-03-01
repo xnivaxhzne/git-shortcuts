@@ -1,12 +1,14 @@
 #! /usr/bin/env node
-const { runCommand } = require("./../utils/run-command");
-const copyToClipboard = require("./../utils/copy_to_clipboard");
+import { runCommandWithOutput } from "./../utils/run_command.js";
+import copyToClipboard from "./../utils/copy_to_clipboard.js";
 
-const handleLastCommitMesssage = (message) => {
-  copyToClipboard(message);
-  console.log(message);
+const main = () => {
+  const lastCommitMessage = runCommandWithOutput(
+    `git show-branch --no-name HEAD`
+  ).trim();
+
+  console.log(lastCommitMessage);
+  copyToClipboard(lastCommitMessage);
 };
 
-runCommand("git", ["show-branch", "--no-name", "HEAD"], {
-  onSuccess: handleLastCommitMesssage
-});
+main();

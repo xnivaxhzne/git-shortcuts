@@ -1,10 +1,12 @@
 #! /usr/bin/env node
-const { runCommand } = require("./../utils/run-command");
+import { runCommandWithOutput } from "./../utils/run_command.js";
 
-const handleLastCommitMesssage = (message) => {
-  console.log(message);
+const main = () => {
+  const lastCommitMessage = runCommandWithOutput(
+    `git show-branch --no-name HEAD`
+  ).trim();
+
+  console.log(lastCommitMessage);
 };
 
-runCommand("git", ["show-branch", "--no-name", "HEAD"], {
-  onSuccess: handleLastCommitMesssage
-});
+main();

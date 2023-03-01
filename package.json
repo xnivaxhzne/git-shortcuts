@@ -20,7 +20,11 @@
   },
   "author": "Kavinkumar R",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "inquirer": "^9.1.4"
   }
 }

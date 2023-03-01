@@ -1,9 +1,9 @@
-const { spawn } = require("child_process");
+import { spawn } from "child_process";
 
-function copyToClipboard(data) {
+const copyToClipboard = (data) => {
   var proc = spawn("pbcopy");
   proc.stdin.write(data);
   proc.stdin.end();
-}
+};
 
-module.exports = copyToClipboard;
+export default copyToClipboard;

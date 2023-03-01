@@ -1,14 +1,28 @@
 #! /usr/bin/env node
-const { runCommand } = require("./../utils/run-command");
-const readline = require("readline/promises");
-const { stdin: input, stdout: output } = require("process");
-const rl = readline.createInterface({ input, output });
+import runCommand from "./../utils/run_command.js";
+import inquirer from "inquirer";
 
-rl.question(`Press ENTER to soft reset the last commit, else 'n': `).then(
-  (userInput) => {
-    if (!userInput) {
-      runCommand("git", ["reset", "--soft", "HEAD~1"]);
+const getConfirmation = async () => {
+  const inputFields = [
+    {
+      type: "confirm",
+      name: "canContinue",
+      message: "Are you sure to soft reset the last commit?: ",
+      default: true
     }
+  ];
+
+  const { canContinue } = await inquirer.prompt(inputFields);
+  return canContinue;
+};
+
+const main = async () => {
+  const canContinue = await getConfirmation();
+
+  if (canContinue) {
+    runCommand("git", ["reset", "--soft", "HEAD~1"]);
+  } else {
     process.exit(0);
   }
-);
+};
+main();

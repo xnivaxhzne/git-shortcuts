@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-const { runCommand } = require("./../utils/run-command");
+import runCommand from "./../utils/run_command.js";
 
 runCommand("git", ["restore", "."]);
