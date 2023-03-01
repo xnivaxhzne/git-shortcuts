@@ -3,7 +3,7 @@ name: 🚀 publish
 on:
   push:
     branches:
-      - master
+      - production
 
 jobs:
   release:
