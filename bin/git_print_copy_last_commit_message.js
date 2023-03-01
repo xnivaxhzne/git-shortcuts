@@ -1,14 +1,4 @@
 #! /usr/bin/env node
-import { runCommandWithOutput } from "./../utils/run_command.js";
-import copyToClipboard from "./../utils/copy_to_clipboard.js";
-
-const main = () => {
-  const lastCommitMessage = runCommandWithOutput(
-    `git show-branch --no-name HEAD`
-  ).trim();
-
-  console.log(lastCommitMessage);
-  copyToClipboard(lastCommitMessage);
-};
+import main from "./../lib/git_print_copy_last_commit_message/index.js";
 
 main();

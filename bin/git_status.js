@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-import runCommand from "./../utils/run_command.js";
+import main from "./../lib/git_status/index.js";
 
-runCommand("git", ["status"]);
+main();

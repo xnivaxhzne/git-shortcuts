@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-import runCommand from "./../utils/run_command.js";
+import main from "./../lib/git_checkout_master/index.js";
 
-runCommand("git", ["checkout", "master"]);
+main();

@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-import runCommand from "./../utils/run_command.js";
+import main from "./../lib/git_current_branch/index.js";
 
-runCommand("git", ["branch", "--show-current"]);
+main();

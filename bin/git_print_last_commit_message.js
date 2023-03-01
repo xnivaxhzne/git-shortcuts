@@ -1,12 +1,4 @@
 #! /usr/bin/env node
-import { runCommandWithOutput } from "./../utils/run_command.js";
-
-const main = () => {
-  const lastCommitMessage = runCommandWithOutput(
-    `git show-branch --no-name HEAD`
-  ).trim();
-
-  console.log(lastCommitMessage);
-};
+import main from "./../lib/git_print_last_commit_message/index.js";
 
 main();
