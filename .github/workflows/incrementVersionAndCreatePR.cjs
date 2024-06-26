@@ -13,6 +13,7 @@ module.exports = async ({ github, context, versionType }) => {
     await execAsync(`npm version ${versionType}`);
     const packageJson = require("../../package.json");
     const version = packageJson.version;
+    console.log(`Incremented version to v${version}(${versionType})`);
     const featureBranch = `chore-increment-verion-${version}-${versionType}-${context.runNumber}`;
     return { featureBranch, version };
   }
