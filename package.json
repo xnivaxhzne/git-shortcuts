@@ -1,6 +1,6 @@
 {
   "name": "@xniva/git-shortcuts",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Shortcuts for the commonly used git commands",
   "repository": "https://github.com/kavinkuma6/git-shortcuts",
   "bin": {
@@ -19,7 +19,8 @@
     "gr": "bin/git_restore.js",
     "gsf": "bin/git_see_feature_files.js",
     "gma": "bin/git_merge_abort.js",
-    "grb": "bin/git_reset_current_branch.js"
+    "grb": "bin/git_reset_current_branch.js",
+    "gphf": "bin/git_push_head_force.js"
   },
   "author": "Kavinkumar R",
   "license": "MIT",
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "dotenv": "16.4.5",
-    "inquirer": "^9.1.4"
+    "inquirer": "^9.1.4",
+    "open": "10.1.0"
   }
 }
