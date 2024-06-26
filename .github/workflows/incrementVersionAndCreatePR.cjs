@@ -14,11 +14,10 @@ module.exports = async ({ github, context, versionType }) => {
   async function incrementVersion() {
     console.log(`Incrementing version with ${versionType}`);
     try {
-      console.log("logtext");
       await execAsync(`npm version ${versionType}`);
     } catch (e) {
-      console.log(e);
-      console.log("Error in incrementing version", e);
+      // console.log(e);
+      // console.log("Error in incrementing version", e);
       throw new Error("Error in incrementing version", e);
     }
     console.log("Version incremented");
@@ -73,6 +72,7 @@ module.exports = async ({ github, context, versionType }) => {
       console.log("Pull request already exists for this version increment");
     }
   } catch (error) {
-    throw new Error("Error in version increment and PR creation", error);
+    console.error(error);
+    throw new Error("Error in version increment and PR creation");
   }
 };
