@@ -32,6 +32,7 @@ npm i -g @xniva/git-shortcuts
 | `glc`            | `git show-branch --no-name HEAD`                                       | Copy and Print the last commit message                         |
 | `gsf`            | `gcm  && gpm && git merge --no-commit --no-ff origin/${featureBranch}` | List the changes of a feature branch w.r.t master - for review |
 | `gma`            | `git merge --abort`                                                    | Abort the merge                                                |
+| `grb`            | `git reset --${hardOrSoft} origin/$(git rev-parse --abbrev-ref HEAD)`  | Reset the current branch to its remote equivalent              |
 
 ### Master branch name is configurable:
 
