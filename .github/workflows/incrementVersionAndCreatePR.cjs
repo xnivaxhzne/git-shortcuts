@@ -23,7 +23,7 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function getPull(source, target) {
-    const existingPr = await github.rest.pulls.list({
+    const existingPr = await github.pulls.list({
       owner: context.repo.owner,
       repo: context.repo.repo,
       head: source,
@@ -34,7 +34,7 @@ module.exports = async ({ github, context, versionType }) => {
 
   async function createPull(title, source, target) {
     try {
-      await github.rest.pulls.create({
+      await github.pulls.create({
         title,
         body: `${title} PR.`,
         owner: context.repo.owner,
