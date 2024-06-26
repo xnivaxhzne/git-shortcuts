@@ -5,8 +5,13 @@ const execAsync = util.promisify(exec);
 
 module.exports = async ({ github, context, versionType }) => {
   async function configureGit() {
-    await execAsync('git config user.name "github-actions"');
-    await execAsync('git config user.email "github-actions@github.com"');
+    try {
+      await execAsync('git config user.name "github-actions"');
+      await execAsync('git config user.email "github-actions@github.com"');
+    } catch (e) {
+      console.log("Error in configuring git user");
+      throw Error(e);
+    }
 
     console.log("Configured git user");
   }
@@ -16,13 +21,10 @@ module.exports = async ({ github, context, versionType }) => {
     try {
       await execAsync(`npm version ${versionType}`);
     } catch (e) {
-      console.error(e);
-      // console.log("Error in incrementing version", e);
+      console.log("Error in incrementing version");
       throw Error(e);
     }
-    console.log("Version incremented");
     const packageJson = require("../../package.json");
-    console.log("packageJson");
     const version = packageJson.version;
     console.log(`Incremented version to v${version}(${versionType})`);
     const featureBranch = `chore-increment-verion-${version}-${versionType}-${context.runNumber}`;
@@ -30,29 +32,44 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function pushChangesAndTags(featureBranch) {
-    await execAsync(`git push origin HEAD:refs/heads/${featureBranch}`);
-    await execAsync("git push origin --tags");
+    try {
+      await execAsync(`git push origin HEAD:refs/heads/${featureBranch}`);
+      await execAsync("git push origin --tags");
+    } catch (e) {
+      console.log("Error in pushing changes and tags");
+      throw Error(e);
+    }
   }
 
   async function getPull(source, target) {
-    const existingPr = await github.pulls.list({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      head: source,
-      base: target,
-    });
-    return existingPr.data.length > 0;
+    try {
+      const existingPr = await github.pulls.list({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        head: source,
+        base: target,
+      });
+      return existingPr.data.length > 0;
+    } catch (e) {
+      console.log("Error in getting pull request");
+      throw Error(e);
+    }
   }
 
   async function createPull(title, source, target) {
-    await github.pulls.create({
-      title,
-      body: `${title} PR.`,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      head: source,
-      base: target,
-    });
+    try {
+      await github.pulls.create({
+        title,
+        body: `${title} PR.`,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        head: source,
+        base: target,
+      });
+    } catch (e) {
+      console.log("Error in creating pull request");
+      throw Error(e);
+    }
   }
 
   try {
@@ -69,7 +86,7 @@ module.exports = async ({ github, context, versionType }) => {
         `Created pull request for version increment to v${version}(${versionType}).`
       );
     } else {
-      console.log("Pull request already exists for this version increment");
+      throw new Error("Pull request already exists for this version increment");
     }
   } catch (error) {
     console.error(error);
