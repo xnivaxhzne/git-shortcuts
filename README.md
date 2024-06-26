@@ -34,6 +34,9 @@ npm i -g @xniva/git-shortcuts
 | `gma`            | `git merge --abort`                                                    | Abort the merge                                                                      |
 | `grb`            | `git reset --${hardOrSoft} origin/$(git rev-parse --abbrev-ref HEAD)`  | Reset the current branch to its remote equivalent                                    |
 | `gphf`           | `git push origin HEAD --force`                                         | Force push the current branch                                                        |
+| `gc`             | `git commit -m ${commitMessage}`                                       | Commit the staged files with the give message                                        |
+| `gcpm`           | `gcm && gpm`                                                           | Checkout master and pull                                                             |
+| `gca`            | `git commit -am ${commitMessage}`                                      | Commit all the files with the give message                                           |
 
 ### Master branch name is configurable:
 
