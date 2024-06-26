@@ -31,6 +31,7 @@ npm i -g @xniva/git-shortcuts
 | `glp`            | `git show-branch --no-name HEAD`                                       | Print the last commit message                                  |
 | `glc`            | `git show-branch --no-name HEAD`                                       | Copy and Print the last commit message                         |
 | `gsf`            | `gcm  && gpm && git merge --no-commit --no-ff origin/${featureBranch}` | List the changes of a feature branch w.r.t master - for review |
+| `gma`            | `git merge --abort`                                                    | Abort the merge                                                |
 
 ### Master branch name is configurable:
 

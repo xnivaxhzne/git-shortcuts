@@ -17,7 +17,8 @@
     "glp": "bin/git_print_last_commit_message.js",
     "glc": "bin/git_print_copy_last_commit_message.js",
     "gr": "bin/git_restore.js",
-    "gsf": "bin/git_see_feature_files.js"
+    "gsf": "bin/git_see_feature_files.js",
+    "gma": "bin/git_merge_abort.js"
   },
   "author": "Kavinkumar R",
   "license": "MIT",
