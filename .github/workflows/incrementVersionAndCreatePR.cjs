@@ -7,12 +7,15 @@ module.exports = async ({ github, context, versionType }) => {
   async function configureGit() {
     await execAsync('git config user.name "github-actions"');
     await execAsync('git config user.email "github-actions@github.com"');
+    console.log("Configured git user");
   }
 
-  async function incrementVersion(versionType, context) {
+  async function incrementVersion() {
+    console.log(`Incrementing version with ${versionType}`);
     await execAsync(`npm version ${versionType}`);
-    const packageJson = require("./package.json");
+    const packageJson = require("../../package.json");
     const version = packageJson.version;
+    console.log(`Incremented version to v${version}(${versionType})`);
     const featureBranch = `chore-increment-verion-${version}-${versionType}-${context.runNumber}`;
     return { featureBranch, version };
   }
@@ -23,7 +26,7 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function getPull(source, target) {
-    const existingPr = await github.rest.pulls.list({
+    const existingPr = await github.pulls.list({
       owner: context.repo.owner,
       repo: context.repo.repo,
       head: source,
@@ -33,38 +36,30 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function createPull(title, source, target) {
-    try {
-      await github.rest.pulls.create({
-        title,
-        body: `${title} PR.`,
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        head: source,
-        base: target,
-      });
-      console.log(`Created pull request: ${title}.`);
-    } catch (error) {
-      console.error(error.errors);
-    }
+    await github.pulls.create({
+      title,
+      body: `${title} PR.`,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      head: source,
+      base: target,
+    });
   }
 
-  try {
-    await configureGit();
-    const { featureBranch, version } = await incrementVersion();
-    const hasOpenPr = await getPull(featureBranch, "master");
+  await configureGit();
+  const { featureBranch, version } = await incrementVersion();
+  const hasOpenPr = await getPull(featureBranch, "master");
 
-    if (!hasOpenPr) {
-      await pushChangesAndTags(featureBranch);
-      const title = `Version Increment to v${version}(${versionType})`;
-      await createPull(title, featureBranch, "master");
-
-      console.log(
-        `Created pull request for version increment to v${version}(${versionType}).`
-      );
-    } else {
-      console.log("Pull request already exists for this version increment.");
-    }
-  } catch (error) {
-    console.error("Error in version increment and PR creation:", error);
+  if (!hasOpenPr) {
+    await pushChangesAndTags(featureBranch);
+    const title = `Version Increment to v${version}(${versionType})`;
+    await createPull(title, featureBranch, "master");
+    console.log(
+      `Created pull request for version increment to v${version}(${versionType}).`
+    );
+  } else {
+    throw new Error(
+      `Pull request already exists for version increment to v${version}(${versionType}).`
+    );
   }
 };
