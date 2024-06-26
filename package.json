@@ -21,7 +21,8 @@
     "gma": "bin/git_merge_abort.js",
     "grb": "bin/git_reset_current_branch.js",
     "gphf": "bin/git_push_head_force.js",
-    "gc": "bin/git_commit_message.js"
+    "gc": "bin/git_commit_message.js",
+    "gcpm": "bin/git_checkout_pull_master.js"
   },
   "author": "Kavinkumar R",
   "license": "MIT",
