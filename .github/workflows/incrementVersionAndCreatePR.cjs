@@ -58,6 +58,8 @@ module.exports = async ({ github, context, versionType }) => {
       `Created pull request for version increment to v${version}(${versionType}).`
     );
   } else {
-    console.error("Pull request already exists for this version increment");
+    throw new Error(
+      `Pull request already exists for version increment to v${version}(${versionType}).`
+    );
   }
 };
