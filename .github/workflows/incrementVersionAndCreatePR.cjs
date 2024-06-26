@@ -7,9 +7,12 @@ module.exports = async ({ github, context, versionType }) => {
   async function configureGit() {
     await execAsync('git config user.name "github-actions"');
     await execAsync('git config user.email "github-actions@github.com"');
+
+    console.log("Configured git user");
   }
 
   async function incrementVersion() {
+    console.log(`Incrementing version with ${versionType}`);
     await execAsync(`npm version ${versionType}`);
     const packageJson = require("../../package.json");
     const version = packageJson.version;
@@ -34,19 +37,14 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function createPull(title, source, target) {
-    try {
-      await github.pulls.create({
-        title,
-        body: `${title} PR.`,
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        head: source,
-        base: target,
-      });
-    } catch (error) {
-      console.log("Error in creating PR", error);
-      throw new Error("Error in creating PR", error);
-    }
+    await github.pulls.create({
+      title,
+      body: `${title} PR.`,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      head: source,
+      base: target,
+    });
   }
 
   try {
