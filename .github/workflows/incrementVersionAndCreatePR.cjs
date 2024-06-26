@@ -33,19 +33,14 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function createPull(title, source, target) {
-    try {
-      await github.pulls.create({
-        title,
-        body: `${title} PR.`,
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        head: source,
-        base: target,
-      });
-    } catch (error) {
-      console.error(error);
-      throw new Error("Error in creating pull request", error);
-    }
+    await github.pulls.create({
+      title,
+      body: `${title} PR.`,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      head: source,
+      base: target,
+    });
   }
 
   try {
@@ -62,7 +57,7 @@ module.exports = async ({ github, context, versionType }) => {
         `Created pull request for version increment to v${version}(${versionType}).`
       );
     } else {
-      throw new Error("Pull request already exists for this version increment");
+      console.error("Pull request already exists for this version increment");
     }
   } catch (error) {
     throw new Error("Error in version increment and PR creation", error);
