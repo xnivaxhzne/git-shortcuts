@@ -35,6 +35,7 @@ npm i -g @xniva/git-shortcuts
 | `grb`            | `git reset --${hardOrSoft} origin/$(git rev-parse --abbrev-ref HEAD)`  | Reset the current branch to its remote equivalent                                    |
 | `gphf`           | `git push origin HEAD --force`                                         | Force push the current branch                                                        |
 | `gc`             | `git commit -m ${commitMessage}`                                       | Commit with the give message                                                         |
+| `gcpm`           | `gcm && gpm`                                                           | Checkout master and pull                                                             |
 
 ### Master branch name is configurable:
 
