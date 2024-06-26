@@ -1,6 +1,6 @@
 {
   "name": "@xniva/git-shortcuts",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Shortcuts for the commonly used git commands",
   "repository": "https://github.com/kavinkuma6/git-shortcuts",
   "bin": {
