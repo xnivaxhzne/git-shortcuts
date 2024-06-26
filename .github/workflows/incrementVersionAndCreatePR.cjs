@@ -46,24 +46,18 @@ module.exports = async ({ github, context, versionType }) => {
     });
   }
 
-  try {
-    await configureGit();
-    const { featureBranch, version } = await incrementVersion();
-    const hasOpenPr = await getPull(featureBranch, "master");
+  await configureGit();
+  const { featureBranch, version } = await incrementVersion();
+  const hasOpenPr = await getPull(featureBranch, "master");
 
-    if (!hasOpenPr) {
-      await pushChangesAndTags(featureBranch);
-      const title = `Version Increment to v${version}(${versionType})`;
-      await createPull(title, featureBranch, "master");
-      console.log(
-        `Created pull request for version increment to v${version}(${versionType}).`
-      );
-    } else {
-      console.error("Pull request already exists for this version increment");
-    }
-  } catch (error) {
-    console.error("Error encountered:", error);
-    throw error;
-    // Decide whether to re-throw the error or handle it differently here
+  if (!hasOpenPr) {
+    await pushChangesAndTags(featureBranch);
+    const title = `Version Increment to v${version}(${versionType})`;
+    await createPull(title, featureBranch, "master");
+    console.log(
+      `Created pull request for version increment to v${version}(${versionType}).`
+    );
+  } else {
+    console.error("Pull request already exists for this version increment");
   }
 };
