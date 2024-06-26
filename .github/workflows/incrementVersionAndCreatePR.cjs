@@ -63,6 +63,7 @@ module.exports = async ({ github, context, versionType }) => {
     }
   } catch (error) {
     console.error("Error encountered:", error);
+    throw error;
     // Decide whether to re-throw the error or handle it differently here
   }
 };
