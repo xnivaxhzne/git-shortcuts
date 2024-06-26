@@ -49,6 +49,8 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   try {
+    console.log("versionType:****");
+    console.log(versionType);
     await configureGit();
     const { featureBranch, version } = await incrementVersion();
     const hasOpenPr = await getPull(featureBranch, "master");
