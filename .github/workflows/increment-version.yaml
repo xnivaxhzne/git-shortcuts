@@ -1,10 +1,10 @@
-name: 'Version Increment and PR Creation'
+name: "Version Increment and PR Creation"
 
 on:
   workflow_dispatch:
     inputs:
       versionType:
-        description: 'Version type (patch, minor, major)'
+        description: "Version type (patch, minor, major)"
         required: true
         type: choice
         options:
@@ -21,12 +21,12 @@ jobs:
           fetch-depth: 0
 
       - uses: actions/github-script@v4
-        name: 'Increment Version and Raise Pull Request'
+        name: "Increment Version and Raise Pull Request"
         with:
           script: |
             const script = require('./.github/workflows/incrementVersionAndCreatePR.cjs')
             await script({
               github,
               context,
-              versionType: ${{ github.event.inputs.versionType }}
+              versionType: '${{ github.event.inputs.versionType }}'
             })
