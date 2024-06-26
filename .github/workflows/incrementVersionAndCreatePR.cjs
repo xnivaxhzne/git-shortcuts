@@ -16,9 +16,9 @@ module.exports = async ({ github, context, versionType }) => {
     try {
       await execAsync(`npm version ${versionType}`);
     } catch (e) {
-      // console.log(e);
+      console.error(e);
       // console.log("Error in incrementing version", e);
-      throw new Error("Error in incrementing version", e);
+      throw Error(e);
     }
     console.log("Version incremented");
     const packageJson = require("../../package.json");
