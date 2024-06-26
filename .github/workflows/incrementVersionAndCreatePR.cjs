@@ -33,14 +33,19 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   async function createPull(title, source, target) {
-    await github.pulls.create({
-      title,
-      body: `${title} PR.`,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      head: source,
-      base: target,
-    });
+    try {
+      await github.pulls.create({
+        title,
+        body: `${title} PR.`,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        head: source,
+        base: target,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error in creating pull request", error);
+    }
   }
 
   try {
