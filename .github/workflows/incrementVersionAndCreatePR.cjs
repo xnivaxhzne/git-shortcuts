@@ -13,7 +13,14 @@ module.exports = async ({ github, context, versionType }) => {
 
   async function incrementVersion() {
     console.log(`Incrementing version with ${versionType}`);
-    await execAsync(`npm version ${versionType}`);
+    try {
+      console.log("logtext");
+      await execAsync(`npm version ${versionType}`);
+    } catch (e) {
+      console.log(e);
+      console.log("Error in incrementing version", e);
+      throw new Error("Error in incrementing version", e);
+    }
     console.log("Version incremented");
     const packageJson = require("../../package.json");
     console.log("packageJson");
