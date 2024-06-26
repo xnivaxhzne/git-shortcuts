@@ -20,7 +20,8 @@
     "gsf": "bin/git_see_feature_files.js",
     "gma": "bin/git_merge_abort.js",
     "grb": "bin/git_reset_current_branch.js",
-    "gphf": "bin/git_push_head_force.js"
+    "gphf": "bin/git_push_head_force.js",
+    "gc": "bin/git_commit_message.js"
   },
   "author": "Kavinkumar R",
   "license": "MIT",
