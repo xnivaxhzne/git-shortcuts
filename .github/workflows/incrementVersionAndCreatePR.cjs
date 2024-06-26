@@ -9,7 +9,7 @@ module.exports = async ({ github, context, versionType }) => {
     await execAsync('git config user.email "github-actions@github.com"');
   }
 
-  async function incrementVersion(versionType, context) {
+  async function incrementVersion() {
     await execAsync(`npm version ${versionType}`);
     const packageJson = require("./package.json");
     const version = packageJson.version;
@@ -49,8 +49,6 @@ module.exports = async ({ github, context, versionType }) => {
   }
 
   try {
-    console.log("versionType:****");
-    console.log(versionType);
     await configureGit();
     const { featureBranch, version } = await incrementVersion();
     const hasOpenPr = await getPull(featureBranch, "master");
